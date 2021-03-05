@@ -9,6 +9,12 @@ let countdownWasStarted = false;
 let pomodoroDuration = minutes_50; //by default
 let timeLeftInSeconds = 0;
 
+var audioList = [
+  document.getElementsByClassName("paimon"),
+  document.getElementsByClassName("shinobu"),
+  document.getElementsByClassName("ononoki"),
+];
+
 // Button Handlers
 function updateDuration() {
   //The pomodoro duration is by default 50, but we can change to 25!
@@ -65,7 +71,7 @@ function updateCountdown() {
   updateTimeString();
 
   if(timeLeftInSeconds == 0) {
-    playYoScott()
+    playAudio()
     stopCountdown()
     isPaused = true
     updatePlayPauseButton()
@@ -110,9 +116,17 @@ function updateTimeString() {
   document.getElementById("countdown").innerHTML = minutes + ":" + secondsString;
 }
 
-function playYoScott() {
-  var yoScottAudio = document.getElementById("yoScottAudio");
-  yoScottAudio.play();
+function playAudio() {
+  // var yoScottAudio = document.getElementById("yoScottAudio");
+  // yoScottAudio.play();
+
+  // randomize auido play
+  var audioListIdx = Math.floor(Math.random() * audioList.length);
+  var audioIdx = Math.floor(Math.random() * audioList[audioListIdx].length);
+
+  var audioToPlay = audioList[audioListIdx][audioIdx];
+  console.log(audioToPlay);
+  audioToPlay.play();
 
   document.getElementById("countdown").innerHTML = "YOO";
 }
